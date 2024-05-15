@@ -1,6 +1,8 @@
 import "~/styles/globals.css";
-
+import { NavBar } from "./_components/page";
 import { GeistSans } from "geist/font/sans";
+import  { ClerkProvider } from "@clerk/nextjs"
+
 
 export const metadata = {
   title: "Create T3 App",
@@ -8,17 +10,7 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-function NavBar(){
-  return (
-    <nav className="flex w-full items-center justify-between p-4 text-xl font-semibold border-b">
-      <div>Gallery</div>
-     
 
-
-      <div>SignIn</div> 
-    </nav>
-  )
-}
 
 export default function RootLayout({
   children,
@@ -26,10 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <ClerkProvider> 
+      <html lang="en" className={`${GeistSans.variable}`}>
       <body className="flex flex-col gap-4">
         <NavBar/>
         {children}</body>
     </html>
+    </ClerkProvider>
+    
   );
 }
