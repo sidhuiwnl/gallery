@@ -1,11 +1,12 @@
 import "~/styles/globals.css";
 import "@uploadthing/react/styles.css";
+import  { ClerkProvider } from "@clerk/nextjs"
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "~/app/api/uploadthing/core";
 import { NavBar } from "./_components/page";
 import { GeistSans } from "geist/font/sans";
-import  { ClerkProvider } from "@clerk/nextjs"
+
 
 
 
