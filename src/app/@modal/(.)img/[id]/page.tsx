@@ -1,5 +1,7 @@
-import Image from "next/image";
+
 import { getImages } from "~/server/queries";
+import { Modal } from "./modal";
+import FullpageView from "~/components/Full-page-image";
 
 export default async function PhotoModal({
   
@@ -12,13 +14,8 @@ export default async function PhotoModal({
   const imgId = Number(photoId)
   const image = await getImages(imgId)
   return (
-    <div>
-      <Image
-      src={image.url}
-      alt={image.name}
-      width={250}
-      height={300}
-      />
-    </div>
+    <Modal>
+      <FullpageView id={imgId}/>
+    </Modal>
   );
 }
