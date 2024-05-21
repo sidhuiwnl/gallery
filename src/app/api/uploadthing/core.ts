@@ -3,6 +3,7 @@ import { UploadThingError } from "uploadthing/server";
 import { auth } from "@clerk/nextjs/server" 
 import { db } from "~/server/db";
 import { image } from "~/server/db/schema";
+import { clerkClient } from "@clerk/nextjs/server";
 
 const f = createUploadthing();
  
@@ -16,7 +17,13 @@ export const ourFileRouter = {
     .middleware(async ({ req }) => {
       // This code runs on your server before upload
       const user =  auth();
- 
+
+      const fullUserData = await clerkClient.users.getUser(user.userId!)
+
+      if(fullUserData?.privateMetadata?.["can-upload"] !== true){
+        throw new UploadThingError("Unauthorized")
+      }
+
       // If you throw, the user will not be able to upload
       if (!user.userId) throw new UploadThingError("Unauthorized");
  
