@@ -7,6 +7,7 @@ import { ourFileRouter } from "~/app/api/uploadthing/core";
 import { NavBar } from "./_components/page";
 import { GeistSans } from "geist/font/sans";
 import { Toaster } from "sonner";
+import { CSPostHogProvider } from "./_analytics/provider";
 
 
 
@@ -27,6 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider> 
+      <CSPostHogProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
       <NextSSRPlugin
           /**
@@ -37,19 +39,22 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-      <body className="dark">
-        <div className="h-screen grid grid-rows-[auto,1fr]">
-        <NavBar/>
-        <main className="overflow-y-scroll">
-          {children}
-        </main>
-        <Toaster/>
-        </div>
         
-        {modal}
-        <div id="modal-root" />
-        </body>
+          <body className="dark">
+            <div className="h-screen grid grid-rows-[auto,1fr]">
+                <NavBar/>
+                <main className="overflow-y-scroll">
+                 {children}
+                </main>
+                <Toaster/>
+            </div>
+        
+              {modal}
+            <div id="modal-root" />
+          </body>
+        
     </html>
+    </CSPostHogProvider>
     </ClerkProvider>
     
   );
