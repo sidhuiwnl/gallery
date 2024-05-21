@@ -6,6 +6,7 @@ import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "~/app/api/uploadthing/core";
 import { NavBar } from "./_components/page";
 import { GeistSans } from "geist/font/sans";
+import { Toaster } from "sonner";
 
 
 
@@ -42,7 +43,7 @@ export default function RootLayout({
         <main className="overflow-y-scroll">
           {children}
         </main>
-        
+        <Toaster/>
         </div>
         
         {modal}
